@@ -65,12 +65,31 @@ pdf(dataBuffer)
 			)
 		}
 
+		// Energia Compensada GD I
+		const compensatedEnergy: string[] | undefined = lines
+			.find((line) => line.includes('Energia compensada GD I'))
+			?.split(' ')
+			.filter((row) => row !== '')
+
+		const dataCompensatedEnergy = {
+			qtd: 0,
+			total: 0,
+		}
+
+		if (compensatedEnergy) {
+			dataCompensatedEnergy.qtd = Number.parseInt(compensatedEnergy[4])
+			dataCompensatedEnergy.total = Number.parseFloat(
+				compensatedEnergy[6].replace(',', '.'),
+			)
+		}
+
 		// Data
 		console.log({
 			n_client: numberClient,
 			month,
 			electricity: dataElectricity,
 			exemptEnergy: dataExemptEnergy,
+			compensatedEnergy: dataCompensatedEnergy,
 		})
 	})
 	.catch((error) => {
