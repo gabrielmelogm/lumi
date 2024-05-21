@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Owner {
+  id       String    @id @default(cuid())
+  n_client String    @unique
+  invoices Invoice[]
+
+  @@map("owners")
+}
+
+model Invoice {
+  id                      String   @id @default(cuid())
+  month                   DateTime
+  electricity_qtd         Int
+  electricity_total       Float
+  exemptEnergy_qtd        Int
+  exemptEnergy_total      Float
+  compensatedEnergy_qtd   Int
+  compensatedEnergy_total Float
+  contribution            Float
+  total                   Float
+
+  Owner   Owner  @relation(fields: [ownerId], references: [id])
+  ownerId String
+
+  @@map("invoices")
+}
