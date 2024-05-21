@@ -93,6 +93,18 @@ pdf(dataBuffer)
 			contribution?.pop()?.replace(',', '.') ?? '0',
 		)
 
+		// Total
+		const total: string[] | undefined = lines
+			.find((line) => line.includes('TOTAL'))
+			?.split(' ')
+			.filter((row) => row !== '')
+
+		let valueTotal = 0
+
+		if (total) {
+			valueTotal = Number.parseFloat(total[1].replace(',', '.'))
+		}
+
 		// Data
 		console.log({
 			n_client: numberClient,
@@ -101,6 +113,7 @@ pdf(dataBuffer)
 			exemptEnergy: dataExemptEnergy,
 			compensatedEnergy: dataCompensatedEnergy,
 			contribution: valueContribution,
+			total: valueTotal,
 		})
 	})
 	.catch((error) => {
