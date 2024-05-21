@@ -1,0 +1,24 @@
+services:
+  api:
+    build:
+      dockerfile: ./apps/api/Dockerfile
+    container_name: "lumi-api"
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/home/node/app
+  
+  mysql:
+    image: postgres:latest
+    container_name: "lumi-database"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "docker"
+      POSTGRES_PASSWORD: "docker"
+      POSTGRES_DB: "lumi"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:

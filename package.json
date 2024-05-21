@@ -1,0 +1,15 @@
+{
+  "name": "lumi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "npx @biomejs/biome check --apply-unsafe apps"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3"
+  }
+}
