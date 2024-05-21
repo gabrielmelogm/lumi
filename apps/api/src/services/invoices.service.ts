@@ -10,8 +10,8 @@ export class InvoicesService {
 		private readonly pdfService: Pdf,
 	) {}
 
-	async CreateInvoice() {
-		const invoice = await this.pdfService.Extract()
+	async CreateInvoice(file: Buffer) {
+		const invoice = await this.pdfService.Extract(file)
 
 		if (!invoice?.n_client) {
 			throw new Error('N Client not found')

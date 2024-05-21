@@ -1,17 +1,10 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import pdf from 'pdf-parse'
 import { pdfMetadata } from '../@types/pdfMetadata'
 import { Pdf } from '../contracts/pdf'
 
-const pdfRelativePath: string = '../../invoices/3000055479-01-2023.pdf'
-const pdfPath: string = path.resolve(__dirname, pdfRelativePath)
-
-const dataBuffer: Buffer = fs.readFileSync(pdfPath)
-
 export class PdfParse implements Pdf {
-	async Extract(): Promise<Partial<pdfMetadata> | undefined> {
-		const metadata: Partial<pdfMetadata> | undefined = await pdf(dataBuffer)
+	async Extract(dataFile: Buffer): Promise<Partial<pdfMetadata> | undefined> {
+		const metadata: Partial<pdfMetadata> | undefined = await pdf(dataFile)
 			.then((data) => {
 				const fullText = data.text
 				const lines: string[] = fullText
