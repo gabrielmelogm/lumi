@@ -83,6 +83,16 @@ pdf(dataBuffer)
 			)
 		}
 
+		// Contrib Ilum Publica Municipal
+		const contribution: string[] | undefined = lines
+			.find((line) => line.includes('Contrib Ilum Publica Municipal'))
+			?.split(' ')
+			.filter((row) => row !== '')
+
+		const valueContribution: number | undefined = Number.parseFloat(
+			contribution?.pop()?.replace(',', '.') ?? '0',
+		)
+
 		// Data
 		console.log({
 			n_client: numberClient,
@@ -90,6 +100,7 @@ pdf(dataBuffer)
 			electricity: dataElectricity,
 			exemptEnergy: dataExemptEnergy,
 			compensatedEnergy: dataCompensatedEnergy,
+			contribution: valueContribution,
 		})
 	})
 	.catch((error) => {
