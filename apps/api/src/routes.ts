@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express'
-import { CreateInvoiceUseCase } from './useCases/createInvoice.usecase'
+import { InvoiceUseCase } from './useCases/invoice.usecase'
 
 const route = Router()
 
@@ -8,7 +8,11 @@ route.get('/ping', (_, res: Response) => {
 })
 
 route.post('/createInvoice', (req: Request, res: Response) =>
-	CreateInvoiceUseCase.handle(req, res),
+	InvoiceUseCase.CreateInvoice(req, res),
+)
+
+route.get('/dashboard', (req: Request, res: Response) =>
+	InvoiceUseCase.GetTotal(req, res),
 )
 
 export { route }

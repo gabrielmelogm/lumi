@@ -15,4 +15,4 @@ const service = new InvoicesService(
 )
 const controller = new InvoicesController(service)
 
-export const CreateInvoiceUseCase = controller
+export const InvoiceUseCase = controller

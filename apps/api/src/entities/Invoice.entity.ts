@@ -12,7 +12,6 @@ export interface InvoiceProps {
 }
 
 export class Invoice {
-	private props: InvoiceProps
 	id: string
 	month: string
 	electricity_qtd: number
@@ -25,7 +24,6 @@ export class Invoice {
 	total: number
 
 	constructor(props: InvoiceProps) {
-		this.props = props
 		this.id = props.id
 		this.month = props.month
 		this.electricity_qtd = props.electricity_qtd

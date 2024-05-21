@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { pdfMetadata } from '../../@types/pdfMetadata'
+import { Invoice } from '../../entities/Invoice.entity'
 import { InvoicesRepository } from '../invoices.repository'
 
 export class PrismaInvoicesRepository implements InvoicesRepository {
@@ -20,5 +21,35 @@ export class PrismaInvoicesRepository implements InvoicesRepository {
 				ownerId,
 			},
 		})
+	}
+
+	async FindAll(): Promise<Invoice[]> {
+		const data = await this.prisma.invoice.findMany()
+		const invoices: Invoice[] = []
+
+		for (const row of data) {
+			const invoice = new Invoice({ ...row, month: String(row.month) })
+			invoices.push(invoice)
+		}
+
+		return invoices
+	}
+
+	async FindByClient(n_client: string): Promise<Invoice[]> {
+		const data = await this.prisma.invoice.findMany({
+			where: {
+				Owner: {
+					n_client,
+				},
+			},
+		})
+		const invoices: Invoice[] = []
+
+		for (const row of data) {
+			const invoice = new Invoice({ ...row, month: String(row.month) })
+			invoices.push(invoice)
+		}
+
+		return invoices
 	}
 }

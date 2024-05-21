@@ -38,4 +38,20 @@ export class InvoicesService {
 
 		return await this.invoicesRepository.CreateInvoice(invoice, owner.id)
 	}
+
+	async GetTotal() {
+		// let dataTotal: InvoicesTotal = {
+		// 	compensatedEnergy: 0,
+		// 	electricPowerConsumption: 0,
+		// 	gdEconomy: 0,
+		// 	totalValueWithoutGD: 0
+		// }
+		const invoices = await this.invoicesRepository.FindAll()
+
+		// for (const invoice of invoices) {
+		// 	dataTotal.electricPowerConsumption = invoice.electricity_qtd + invoice.
+		// }
+
+		return invoices
+	}
 }

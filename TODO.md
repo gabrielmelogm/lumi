@@ -9,3 +9,7 @@
 
 ## Scripts
 - [X] Scripts to extract all data
+
+## Endpoints
+- [ ] Dashboard 
+- [ ] Download
