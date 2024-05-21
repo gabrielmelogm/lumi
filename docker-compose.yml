@@ -4,11 +4,15 @@ services:
     container_name: "lumi-api"
     ports:
       - "3000:3000"
+    depends_on:
+      - database
+    links:
+      - database
     volumes:
       - .:/home/node/app
   
-  mysql:
-    image: postgres:latest
+  database:
+    image: postgres:16-alpine
     container_name: "lumi-database"
     ports:
       - "5432:5432"
@@ -19,5 +23,18 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
 
+  shadow_database:
+    image: postgres:16-alpine
+    container_name: "lumi-shadow_database"
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: "docker"
+      POSTGRES_PASSWORD: "docker"
+      POSTGRES_DB: "shadow_lumi"
+    volumes:
+      - shadow_db:/var/lib/postgresql/data
+
 volumes:
   db:
+  shadow_db:
