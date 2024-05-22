@@ -1,8 +1,9 @@
 import { Container } from './components/Container'
-import { DataTable } from './components/DataTable'
-import { columns } from './components/DataTable/columns'
-import { invoices } from './components/DataTable/data'
+
 import { Dashboard } from './layout/Dashboard'
+import { DataTable } from './layout/DataTable'
+import { columns } from './layout/DataTable/columns'
+import { invoices } from './layout/DataTable/data'
 
 function App() {
 	return (

@@ -7,6 +7,7 @@ import {
 	useReactTable,
 } from '@tanstack/react-table'
 
+import { Input } from '@/components/ui/input'
 import {
 	Table,
 	TableBody,
@@ -16,7 +17,6 @@ import {
 	TableRow,
 } from '@/components/ui/table'
 import { useState } from 'react'
-import { Input } from '../ui/input'
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
