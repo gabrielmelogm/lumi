@@ -45,8 +45,13 @@ export class PdfParse implements Pdf {
 				}
 
 				// Energia SCEE ISENTA
+				// const exemptEnergy: string[] | undefined = lines
+				// 	.find((line) => line.includes('Energia SCEE ISENTA'))
+				// 	?.split(' ')
+				// 	.filter((row) => row !== '')
+
 				const exemptEnergy: string[] | undefined = lines
-					.find((line) => line.includes('Energia SCEE ISENTA'))
+					.find((line) => line.includes('Energia SCEE s/ ICMS'))
 					?.split(' ')
 					.filter((row) => row !== '')
 
@@ -55,10 +60,21 @@ export class PdfParse implements Pdf {
 					total: 0,
 				}
 
+				// if (exemptEnergy) {
+				// 	dataExemptEnergy.qtd = Number.parseInt(
+				// 		exemptEnergy[3].replace('.', ''),
+				// 	)
+				// 	dataExemptEnergy.total = Number.parseFloat(
+				// 		exemptEnergy[5].replace(',', '.'),
+				// 	)
+				// }
+
 				if (exemptEnergy) {
-					dataExemptEnergy.qtd = Number.parseInt(exemptEnergy[3])
+					dataExemptEnergy.qtd = Number.parseInt(
+						exemptEnergy[4].replace('.', ''),
+					)
 					dataExemptEnergy.total = Number.parseFloat(
-						exemptEnergy[5].replace(',', '.'),
+						exemptEnergy[6].replace(',', '.'),
 					)
 				}
 

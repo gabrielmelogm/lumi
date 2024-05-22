@@ -4,7 +4,7 @@ import { prisma } from '../src/database/prisma'
 import { PrismaInvoicesRepository } from '../src/repositories/implements/prismaInvoices.repository'
 import { PrismaOwnersRepository } from '../src/repositories/implements/prismaOwners.repository'
 import { InvoicesService } from '../src/services/invoices.service'
-import { PdfParse } from '../src/services/pdf'
+import { PdfParse } from '../src/services/pdf.service'
 
 class ExtractPdf {
 	constructor() {

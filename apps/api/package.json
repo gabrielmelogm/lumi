@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/main.ts",
     "build": "tsc",
-    "generate": "node dist/scripts/extractPdf.js"
+    "generate": "npm run build && node dist/scripts/extractPdf.js"
   },
   "keywords": [],
   "author": "",

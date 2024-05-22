@@ -3,7 +3,7 @@ import { prisma } from '../database/prisma'
 import { PrismaInvoicesRepository } from '../repositories/implements/prismaInvoices.repository'
 import { PrismaOwnersRepository } from '../repositories/implements/prismaOwners.repository'
 import { InvoicesService } from '../services/invoices.service'
-import { PdfParse } from '../services/pdf'
+import { PdfParse } from '../services/pdf.service'
 
 const invoiceRepository = new PrismaInvoicesRepository(prisma)
 const ownerRepository = new PrismaOwnersRepository(prisma)
