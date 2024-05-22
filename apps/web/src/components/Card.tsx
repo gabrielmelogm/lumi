@@ -16,7 +16,7 @@ export function Card(props: CardProps) {
 			<div className="flex flex-col gap-2 items-end">
 				<h2 className="text-dark-gray font-bold">{props.title}</h2>
 				<h3 className="text-green text-3xl font-bold">
-					{props.value.toFixed(3)}{' '}
+					{props.value.toFixed(2)}{' '}
 					<span className="text-sm font-normal text-dark-gray">
 						{props.symbol}
 					</span>
