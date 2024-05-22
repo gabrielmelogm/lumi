@@ -10,10 +10,7 @@ export type Invoice = {
 	contribution: number
 	total: number
 	filename: string
-	Owner: {
-		id: string
-		n_client: string
-	}
+	n_client: string
 }
 
 export const invoices: Invoice[] = [
@@ -29,10 +26,7 @@ export const invoices: Invoice[] = [
 		contribution: 50,
 		total: 413.8,
 		filename: 'unknown.pdf',
-		Owner: {
-			id: 'aksoakskaskas',
-			n_client: '04844844515',
-		},
+		n_client: '04844844515',
 	},
 	{
 		id: 'asoakskoas',
@@ -46,10 +40,7 @@ export const invoices: Invoice[] = [
 		contribution: 50,
 		total: 413.8,
 		filename: 'unknown.pdf',
-		Owner: {
-			id: 'aksoakskaskas',
-			n_client: '04844844515',
-		},
+		n_client: '04844844515',
 	},
 	{
 		id: 'asoakskoas',
@@ -63,10 +54,7 @@ export const invoices: Invoice[] = [
 		contribution: 50,
 		total: 413.8,
 		filename: 'unknown.pdf',
-		Owner: {
-			id: 'aksoakskaskas',
-			n_client: '04844844515',
-		},
+		n_client: '04844844515',
 	},
 	{
 		id: 'asoakskoas',
@@ -80,10 +68,7 @@ export const invoices: Invoice[] = [
 		contribution: 50,
 		total: 413.8,
 		filename: 'unknown.pdf',
-		Owner: {
-			id: 'aksoakskaskas',
-			n_client: '04844844515',
-		},
+		n_client: '04844844515',
 	},
 	{
 		id: 'asoakskoas',
@@ -97,10 +82,7 @@ export const invoices: Invoice[] = [
 		contribution: 50,
 		total: 413.8,
 		filename: 'unknown.pdf',
-		Owner: {
-			id: 'aksoakskaskas',
-			n_client: '04844844515',
-		},
+		n_client: '9090909090',
 	},
 	{
 		id: 'asoakskoas',
@@ -114,9 +96,6 @@ export const invoices: Invoice[] = [
 		contribution: 50,
 		total: 413.8,
 		filename: 'unknown.pdf',
-		Owner: {
-			id: 'aksoakskaskas',
-			n_client: '04844844515',
-		},
+		n_client: '9090909090',
 	},
 ]

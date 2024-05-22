@@ -25,11 +25,8 @@ export const columns: ColumnDef<Invoice>[] = [
 		),
 	},
 	{
+		accessorKey: 'n_client',
 		header: 'Nº Cliente',
-		cell: ({ row }) => {
-			const cell = row.original
-			return cell.Owner.n_client
-		},
 	},
 	{
 		accessorKey: 'electricity_qtd',
