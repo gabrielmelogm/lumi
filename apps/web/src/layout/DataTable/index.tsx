@@ -18,6 +18,12 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table'
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from '@/components/ui/tooltip'
 import { useState } from 'react'
 import { Invoice } from './data'
 
@@ -58,14 +64,23 @@ export function DataTable<TData, TValue>({
 	return (
 		<div>
 			<div className="w-full flex items-center gap-2 py-4">
-				<Button
-					className="text-xl p-3"
-					type="button"
-					onClick={() => getSelectedRows()}
-					disabled={getSelectedRows().length === 0}
-				>
-					<BiDownload />
-				</Button>
+				<TooltipProvider>
+					<Tooltip>
+						<TooltipTrigger asChild>
+							<Button
+								className="text-xl p-3"
+								type="button"
+								onClick={() => getSelectedRows()}
+								disabled={getSelectedRows().length === 0}
+							>
+								<BiDownload />
+							</Button>
+						</TooltipTrigger>
+						<TooltipContent>
+							<span>Fazer download de {getSelectedRows().length} arquivos</span>
+						</TooltipContent>
+					</Tooltip>
+				</TooltipProvider>
 				<Input
 					placeholder="Filtrar clientes"
 					value={
