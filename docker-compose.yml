@@ -10,6 +10,16 @@ services:
       - database
     volumes:
       - .:/home/node/app
+
+  web:
+    build: .
+    container_name: "lumi-web"
+    ports:
+      - "5173:5173"
+    links:
+      - api
+    volumes:
+      - .:/home/node/app
   
   database:
     image: postgres:16-alpine
