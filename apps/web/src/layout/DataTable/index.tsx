@@ -6,7 +6,9 @@ import {
 	getFilteredRowModel,
 	useReactTable,
 } from '@tanstack/react-table'
+import { BiDownload } from 'react-icons/bi'
 
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
 	Table,
@@ -17,6 +19,7 @@ import {
 	TableRow,
 } from '@/components/ui/table'
 import { useState } from 'react'
+import { Invoice } from './data'
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[]
@@ -28,6 +31,7 @@ export function DataTable<TData, TValue>({
 	data,
 }: DataTableProps<TData, TValue>) {
 	const [columnFilters, setColumnsFilters] = useState<ColumnFiltersState>([])
+	const [rowSelection, setRowSelection] = useState({})
 
 	const table = useReactTable({
 		data,
@@ -35,14 +39,33 @@ export function DataTable<TData, TValue>({
 		getCoreRowModel: getCoreRowModel(),
 		onColumnFiltersChange: setColumnsFilters,
 		getFilteredRowModel: getFilteredRowModel(),
+		onRowSelectionChange: setRowSelection,
 		state: {
 			columnFilters,
+			rowSelection,
 		},
 	})
 
+	function getSelectedRows(): Invoice[] {
+		const rows: Invoice[] = []
+		for (const row of table.getFilteredSelectedRowModel().rows) {
+			const rowData = row.original as Invoice
+			rows.push(rowData)
+		}
+		return rows
+	}
+
 	return (
 		<div>
-			<div className="flex items-center py-4">
+			<div className="w-full flex items-center gap-2 py-4">
+				<Button
+					className="text-xl p-3"
+					type="button"
+					onClick={() => getSelectedRows()}
+					disabled={getSelectedRows().length === 0}
+				>
+					<BiDownload />
+				</Button>
 				<Input
 					placeholder="Filtrar clientes"
 					value={
