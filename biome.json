@@ -21,7 +21,8 @@
 				"noExplicitAny": "warn"
 			},
 			"style": {
-				"useImportType": "off"
+				"useImportType": "off",
+				"noNonNullAssertion": "off"
 			},
 			"complexity": {
 				"useLiteralKeys": "off"
