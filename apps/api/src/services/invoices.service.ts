@@ -1,3 +1,4 @@
+import { InvoicesTotal } from '../contracts/invoicesTotal'
 import { Pdf } from '../contracts/pdf'
 import { Owner } from '../entities/Owner.entity'
 import { InvoicesRepository } from '../repositories/invoices.repository'
@@ -40,18 +41,25 @@ export class InvoicesService {
 	}
 
 	async GetTotal() {
-		// let dataTotal: InvoicesTotal = {
-		// 	compensatedEnergy: 0,
-		// 	electricPowerConsumption: 0,
-		// 	gdEconomy: 0,
-		// 	totalValueWithoutGD: 0
-		// }
+		const dataTotal: InvoicesTotal = {
+			compensatedEnergy: 0,
+			electricPowerConsumption: 0,
+			gdEconomy: 0,
+			totalValueWithoutGD: 0,
+		}
 		const invoices = await this.invoicesRepository.FindAll()
 
-		// for (const invoice of invoices) {
-		// 	dataTotal.electricPowerConsumption = invoice.electricity_qtd + invoice.
-		// }
+		for (const invoice of invoices) {
+			dataTotal.electricPowerConsumption +=
+				invoice.electricity_qtd + invoice.exemptEnergy_qtd
+			dataTotal.compensatedEnergy += invoice.compensatedEnergy_qtd
+			dataTotal.totalValueWithoutGD +=
+				invoice.electricity_total +
+				invoice.exemptEnergy_total +
+				invoice.contribution
+			dataTotal.gdEconomy += invoice.compensatedEnergy_total
+		}
 
-		return invoices
+		return dataTotal
 	}
 }

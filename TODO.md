@@ -11,5 +11,9 @@
 - [X] Scripts to extract all data
 
 ## Endpoints
-- [ ] Dashboard 
+- [X] Dashboard 
+  - [X] Consumo de Energia Elétrica KWh
+  - [X] Energia Compensada kWh
+  - [X] Valor Total sem GD R$
+  - [X] Economia GD R$
 - [ ] Download
