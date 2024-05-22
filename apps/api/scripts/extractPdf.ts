@@ -43,6 +43,7 @@ class ExtractPdf {
 
 		for (const file of files) {
 			const dataBuffer: Buffer = fs.readFileSync(file)
+			const filename: string = file.split('/').pop() ?? ''
 
 			const invoiceRepository = new PrismaInvoicesRepository(prisma)
 			const ownerRepository = new PrismaOwnersRepository(prisma)
@@ -52,7 +53,7 @@ class ExtractPdf {
 				ownerRepository,
 				pdfService,
 			)
-			await service.CreateInvoice(dataBuffer)
+			await service.CreateInvoice(dataBuffer, filename)
 		}
 	}
 }

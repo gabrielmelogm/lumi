@@ -33,6 +33,7 @@ model Invoice {
   compensatedEnergy_total Float
   contribution            Float
   total                   Float
+  filename                String
 
   Owner   Owner  @relation(fields: [ownerId], references: [id])
   ownerId String

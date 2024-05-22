@@ -9,7 +9,7 @@ export class InvoicesController {
 	async CreateInvoice(req: Request, res: Response) {
 		const dataBuffer: Buffer = fs.readFileSync(req.body.file)
 
-		await this.invoicesService.CreateInvoice(dataBuffer)
+		await this.invoicesService.CreateInvoice(dataBuffer, req.body.filename)
 		return res.status(200).send({ status: 'success' })
 	}
 

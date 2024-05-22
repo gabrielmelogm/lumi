@@ -6,6 +6,7 @@
 - [X] ‘Energia Compensada GD I’ – Quantidade (kWh) e Valor (R$)
 - [X] ‘Contrib Ilum Publica Municipal’ – Valor (R$)
 - [X] Total
+- [X] File name
 
 ## Scripts
 - [X] Scripts to extract all data

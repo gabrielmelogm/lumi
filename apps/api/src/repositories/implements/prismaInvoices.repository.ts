@@ -6,7 +6,11 @@ import { InvoicesRepository } from '../invoices.repository'
 export class PrismaInvoicesRepository implements InvoicesRepository {
 	constructor(private readonly prisma: PrismaClient) {}
 
-	async CreateInvoice(data: pdfMetadata, ownerId: string): Promise<void> {
+	async CreateInvoice(
+		data: pdfMetadata,
+		ownerId: string,
+		filename: string,
+	): Promise<void> {
 		await this.prisma.invoice.create({
 			data: {
 				month: new Date(data.month),
@@ -19,6 +23,7 @@ export class PrismaInvoicesRepository implements InvoicesRepository {
 				compensatedEnergy_total: data.compensatedEnergy.total,
 				contribution: data.contribution,
 				ownerId,
+				filename,
 			},
 		})
 	}

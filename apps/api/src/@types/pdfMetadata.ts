@@ -11,4 +11,5 @@ export interface pdfMetadata {
 	compensatedEnergy: dataValues
 	contribution: number
 	total: number
+	filename: string
 }

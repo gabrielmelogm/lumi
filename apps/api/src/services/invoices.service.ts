@@ -11,7 +11,7 @@ export class InvoicesService {
 		private readonly pdfService: Pdf,
 	) {}
 
-	async CreateInvoice(file: Buffer) {
+	async CreateInvoice(file: Buffer, filename: string) {
 		const invoice = await this.pdfService.Extract(file)
 
 		if (!invoice?.n_client) {
@@ -37,7 +37,11 @@ export class InvoicesService {
 			})
 		}
 
-		return await this.invoicesRepository.CreateInvoice(invoice, owner.id)
+		return await this.invoicesRepository.CreateInvoice(
+			invoice,
+			owner.id,
+			filename,
+		)
 	}
 
 	async GetTotal() {
