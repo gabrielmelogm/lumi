@@ -15,4 +15,8 @@ route.get('/dashboard', (req: Request, res: Response) =>
 	InvoiceUseCase.GetTotal(req, res),
 )
 
+route.get('/invoices', (req: Request, res: Response) =>
+	InvoiceUseCase.FindMany(req, res),
+)
+
 export { route }

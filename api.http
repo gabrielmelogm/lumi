@@ -3,3 +3,9 @@ POST http://localhost:3333/createInvoice
 
 ###
 GET http://localhost:3333/dashboard
+
+###
+GET http://localhost:3333/invoices
+
+###
+GET http://localhost:3333/invoices?n_client=7005400387

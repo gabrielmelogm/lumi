@@ -17,4 +17,11 @@ export class InvoicesController {
 		const data = await this.invoicesService.GetTotal()
 		return res.status(200).send(data)
 	}
+
+	async FindMany(req: Request, res: Response) {
+		const param = req.query?.n_client as string
+
+		const data = await this.invoicesService.FindMany(param)
+		return res.status(200).send(data)
+	}
 }

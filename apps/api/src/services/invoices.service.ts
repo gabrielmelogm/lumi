@@ -62,4 +62,12 @@ export class InvoicesService {
 
 		return dataTotal
 	}
+
+	async FindMany(n_client?: string) {
+		if (n_client) {
+			return await this.invoicesRepository.FindByClient(n_client)
+		}
+
+		return await this.invoicesRepository.FindAll()
+	}
 }

@@ -16,4 +16,5 @@
   - [X] Energia Compensada kWh
   - [X] Valor Total sem GD R$
   - [X] Economia GD R$
+- [X] Invoices
 - [ ] Download
