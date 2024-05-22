@@ -1,3 +1,5 @@
+import { getTableData } from '@/services/getTableData.service'
+
 export type Invoice = {
 	id: string
 	month: string
@@ -13,89 +15,4 @@ export type Invoice = {
 	n_client: string
 }
 
-export const invoices: Invoice[] = [
-	{
-		id: 'asoakskoas',
-		month: new Date().toDateString(),
-		electricity_qtd: 5,
-		electricity_total: 150.5,
-		exemptEnergy_qtd: 30,
-		exemptEnergy_total: 300.6,
-		compensatedEnergy_qtd: 60,
-		compensatedEnergy_total: 80.3,
-		contribution: 50,
-		total: 413.8,
-		filename: 'unknown.pdf',
-		n_client: '04844844515',
-	},
-	{
-		id: 'asoakskoas',
-		month: new Date().toDateString(),
-		electricity_qtd: 5,
-		electricity_total: 150.5,
-		exemptEnergy_qtd: 30,
-		exemptEnergy_total: 300.6,
-		compensatedEnergy_qtd: 60,
-		compensatedEnergy_total: 80.3,
-		contribution: 50,
-		total: 413.8,
-		filename: 'unknown.pdf',
-		n_client: '04844844515',
-	},
-	{
-		id: 'asoakskoas',
-		month: new Date().toDateString(),
-		electricity_qtd: 5,
-		electricity_total: 150.5,
-		exemptEnergy_qtd: 30,
-		exemptEnergy_total: 300.6,
-		compensatedEnergy_qtd: 60,
-		compensatedEnergy_total: 80.3,
-		contribution: 50,
-		total: 413.8,
-		filename: 'unknown.pdf',
-		n_client: '04844844515',
-	},
-	{
-		id: 'asoakskoas',
-		month: new Date().toDateString(),
-		electricity_qtd: 5,
-		electricity_total: 150.5,
-		exemptEnergy_qtd: 30,
-		exemptEnergy_total: 300.6,
-		compensatedEnergy_qtd: 60,
-		compensatedEnergy_total: 80.3,
-		contribution: 50,
-		total: 413.8,
-		filename: 'unknown.pdf',
-		n_client: '04844844515',
-	},
-	{
-		id: 'asoakskoas',
-		month: new Date().toDateString(),
-		electricity_qtd: 5,
-		electricity_total: 150.5,
-		exemptEnergy_qtd: 30,
-		exemptEnergy_total: 300.6,
-		compensatedEnergy_qtd: 60,
-		compensatedEnergy_total: 80.3,
-		contribution: 50,
-		total: 413.8,
-		filename: 'unknown.pdf',
-		n_client: '9090909090',
-	},
-	{
-		id: 'asoakskoas',
-		month: new Date().toDateString(),
-		electricity_qtd: 5,
-		electricity_total: 150.5,
-		exemptEnergy_qtd: 30,
-		exemptEnergy_total: 300.6,
-		compensatedEnergy_qtd: 60,
-		compensatedEnergy_total: 80.3,
-		contribution: 50,
-		total: 413.8,
-		filename: 'unknown.pdf',
-		n_client: '9090909090',
-	},
-]
+export const invoices: Invoice[] = await getTableData()
