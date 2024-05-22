@@ -4,9 +4,11 @@ import {
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
+	getPaginationRowModel,
 	useReactTable,
 } from '@tanstack/react-table'
 import { BiDownload } from 'react-icons/bi'
+import { GrNext, GrPrevious } from 'react-icons/gr'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -43,6 +45,7 @@ export function DataTable<TData, TValue>({
 		data,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
+		getPaginationRowModel: getPaginationRowModel(),
 		onColumnFiltersChange: setColumnsFilters,
 		getFilteredRowModel: getFilteredRowModel(),
 		onRowSelectionChange: setRowSelection,
@@ -142,6 +145,24 @@ export function DataTable<TData, TValue>({
 						)}
 					</TableBody>
 				</Table>
+			</div>
+			<div className="flex items-center justify-end space-x-2 py-4">
+				<Button
+					variant="outline"
+					size="sm"
+					onClick={() => table.previousPage()}
+					disabled={!table.getCanPreviousPage()}
+				>
+					<GrPrevious />
+				</Button>
+				<Button
+					variant="outline"
+					size="sm"
+					onClick={() => table.nextPage()}
+					disabled={!table.getCanNextPage()}
+				>
+					<GrNext />
+				</Button>
 			</div>
 		</div>
 	)

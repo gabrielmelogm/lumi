@@ -14,7 +14,7 @@ function App() {
 				<div className="w-full mt-8">
 					<Dashboard />
 				</div>
-				<div className="mt-8">
+				<div className="my-8">
 					<DataTable columns={columns} data={invoices} />
 				</div>
 			</Container>
