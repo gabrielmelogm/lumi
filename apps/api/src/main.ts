@@ -1,3 +1,6 @@
+import 'dotenv/config'
+
+import cors from 'cors'
 import express from 'express'
 import { route } from './routes'
 
@@ -5,6 +8,11 @@ process.on('SIGTERM', () => process.exit())
 
 export const app = express()
 
+app.use(
+	cors({
+		origin: process.env.TRUSTED_DOMAINS,
+	}),
+)
 app.use(express.json())
 app.use(route)
 
