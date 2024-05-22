@@ -19,4 +19,8 @@ route.get('/invoices', (req: Request, res: Response) =>
 	InvoiceUseCase.FindMany(req, res),
 )
 
+route.get('/download/:filename', (req, res) =>
+	InvoiceUseCase.Download(req, res),
+)
+
 export { route }

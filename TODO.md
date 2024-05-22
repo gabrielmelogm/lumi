@@ -1,4 +1,6 @@
-## Extract data PDF
+## Backend
+
+### Extract data PDF
 - [X] Nº DO CLIENTE
 - [X] Mês de referência (identificado como “Referente a” na fatura)
 - [X] ‘Energia Elétrica’ – Quantidade (kWh) e Valor (R$)
@@ -8,14 +10,28 @@
 - [X] Total
 - [X] File name
 
-## Scripts
+### Scripts
 - [X] Scripts to extract all data
 
-## Endpoints
+### Endpoints
 - [X] Dashboard 
   - [X] Consumo de Energia Elétrica KWh
   - [X] Energia Compensada kWh
   - [X] Valor Total sem GD R$
   - [X] Economia GD R$
 - [X] Invoices
-- [ ] Download
+- [X] Download
+
+### Tests
+- [ ] Unit tests
+
+## Frontend
+- [ ] Dashboard
+- [ ] Table
+
+## Docs
+- [ ] README
+
+## CI
+- [ ] Git actions
+- [ ] Deploy
