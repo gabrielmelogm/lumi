@@ -1,7 +1,29 @@
 import { ColumnDef } from '@tanstack/react-table'
+import { Checkbox } from '../ui/checkbox'
 import { Invoice } from './data'
 
 export const columns: ColumnDef<Invoice>[] = [
+	{
+		id: 'select',
+		header: ({ table }) => (
+			<Checkbox
+				className="border-white"
+				checked={
+					table.getIsAllPageRowsSelected() ||
+					(table.getIsSomePageRowsSelected() && 'indeterminate')
+				}
+				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+				aria-label="Select all"
+			/>
+		),
+		cell: ({ row }) => (
+			<Checkbox
+				checked={row.getIsSelected()}
+				onCheckedChange={(value) => row.toggleSelected(!!value)}
+				aria-label="Select row"
+			/>
+		),
+	},
 	{
 		header: 'Nº Cliente',
 		cell: ({ row }) => {
