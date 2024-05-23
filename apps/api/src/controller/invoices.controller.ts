@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import jszip from 'jszip'
 
 import { Request, Response } from 'express'
 import { InvoicesService } from '../services/invoices.service'
@@ -28,21 +29,45 @@ export class InvoicesController {
 	}
 
 	async Download(req: Request, res: Response) {
-		const filename = req.params.filename
-		const filePath = path.join(filepath, filename)
+		const filenames: string[] = req.body.filenames
 
-		fs.access(filePath, fs.constants.F_OK, (err) => {
-			if (err) {
-				console.error(err)
-				return res.status(400).send({ error: 'File not found' })
+		if (!filenames || !Array.isArray(filenames)) {
+			return res.status(400).send({ error: 'Missing or invalid file names' })
+		}
+
+		const paths = []
+
+		for (const filename of filenames) {
+			const fullFilePath = path.join(filepath, filename)
+			paths.push(fullFilePath)
+		}
+
+		for (const fullFilePath of paths) {
+			if (!fs.existsSync(fullFilePath)) {
+				return res
+					.status(404)
+					.send({ error: `File not found: ${fullFilePath.split('/').pop()}` })
 			}
+		}
 
-			res.setHeader('Content-Disposition', `attachment; filename="${filename}"`)
+		res.setHeader('Content-Type', 'application/pdf')
+		res.setHeader('Content-Disposition', `attachment; filename="invoices.zip"`)
 
-			res.setHeader('Content-Type', 'application/pdf')
+		const zip = new jszip()
 
-			const fileStream: fs.ReadStream = fs.createReadStream(filePath)
-			fileStream.pipe(res)
-		})
+		for (const fullFilePath of paths) {
+			const pdfData = fs.readFileSync(fullFilePath)
+			zip.file(path.basename(fullFilePath), pdfData)
+		}
+
+		zip
+			.generateAsync({ type: 'nodebuffer' })
+			.then((zipData) => {
+				res.status(200).send(zipData)
+			})
+			.catch((err) => {
+				console.error('Error generating zip file:', err)
+				res.status(500).send('Error generating zip file')
+			})
 	}
 }

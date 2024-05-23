@@ -20,14 +20,15 @@
   - [X] Valor Total sem GD R$
   - [X] Economia GD R$
 - [X] Invoices
-- [X] Download
+- [X] Multiple downloads
 
 ### Tests
 - [ ] Unit tests
 
 ## Frontend
-- [ ] Dashboard
-- [ ] Table
+- [X] Dashboard
+- [X] Table
+- [X] Connect on api
 
 ## Docs
 - [ ] README

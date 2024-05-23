@@ -26,6 +26,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { api } from '@/lib/api'
 import { useState } from 'react'
 import { Invoice } from './data'
 
@@ -40,6 +41,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
 	const [columnFilters, setColumnsFilters] = useState<ColumnFiltersState>([])
 	const [rowSelection, setRowSelection] = useState({})
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const table = useReactTable({
 		data,
@@ -64,6 +66,31 @@ export function DataTable<TData, TValue>({
 		return rows
 	}
 
+	async function handleDownloadFiles() {
+		setLoading(true)
+		const invoices = getSelectedRows()
+		const filenames = invoices.map((invoice) => invoice.filename)
+		const response = await api.post(
+			'/download',
+			{ filenames },
+			{
+				responseType: 'blob',
+			},
+		)
+
+		const url = window.URL.createObjectURL(new Blob([response.data]))
+
+		const link = document.createElement('a')
+		link.href = url
+		link.setAttribute('download', 'invoices.zip')
+
+		document.body.appendChild(link)
+		link.click()
+
+		document.body.removeChild(link)
+		setLoading(false)
+	}
+
 	return (
 		<div>
 			<div className="w-full flex items-center gap-2 py-4">
@@ -73,8 +100,8 @@ export function DataTable<TData, TValue>({
 							<Button
 								className="text-xl p-3"
 								type="button"
-								onClick={() => getSelectedRows()}
-								disabled={getSelectedRows().length === 0}
+								onClick={() => handleDownloadFiles()}
+								disabled={getSelectedRows().length === 0 || loading}
 							>
 								<BiDownload />
 							</Button>

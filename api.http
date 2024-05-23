@@ -11,4 +11,4 @@ GET http://localhost:3333/invoices
 GET http://localhost:3333/invoices?n_client=7005400387
 
 ###
-GET http://localhost:3333/download/3000055479-01-2023.pdf
+POST http://localhost:3333/download

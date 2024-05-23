@@ -7,7 +7,7 @@ import { invoices } from './layout/DataTable/data'
 
 function App() {
 	return (
-		<div className="w-full flex justify-center">
+		<div className="w-full flex justify-center px-16">
 			<Container className="mt-12">
 				<h1 className="text-2xl text-green font-bold">Dashboard</h1>
 
