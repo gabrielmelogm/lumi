@@ -7,7 +7,12 @@ export interface DashboardDataProps {
 	totalValueWithoutGD: number
 }
 
-export async function getDashboardData(): Promise<DashboardDataProps> {
-	const response = await api.get('/dashboard')
-	return response.data
+export async function getDashboardData(): Promise<DashboardDataProps | []> {
+	try {
+		const response = await api.get('/dashboard')
+		return response.data
+	} catch (error) {
+		console.error(error)
+		return []
+	}
 }
