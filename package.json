@@ -1,8 +1,10 @@
 {
   "name": "lumi",
+  "workspaces": ["apps/*"],
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": "true",
   "scripts": {
     "lint": "npx @biomejs/biome check --apply-unsafe apps"
   },

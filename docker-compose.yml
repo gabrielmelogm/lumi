@@ -2,9 +2,7 @@ services:
   api:
     build: .
     container_name: "lumi-api"
-    command: npm --prefix ./apps/api run dev
-    environment:
-      - PORT=3000
+    entrypoint: .docker/scripts/start_api.sh
     ports:
       - "3000:3000"
     depends_on:
@@ -13,16 +11,24 @@ services:
       - database
     volumes:
       - .:/home/node/app
+    environment:
+      DATABASE_URL: "postgresql://docker:docker@database:5432/lumi"
+      SHADOW_DATABASE_URL: "postgresql://docker:docker@shadow_database:5432/shadow_lumi"
+      TRUSTED_DOMAINS: "*"
+      PORT: "3000"
 
-  # web:
-  #   build: .
-  #   container_name: "lumi-web"
-  #   ports:
-  #     - "5173:5173"
-  #   links:
-  #     - api
-  #   volumes:
-  #     - .:/home/node/app
+  web:
+    build: .
+    container_name: "lumi-web"
+    entrypoint: .docker/scripts/start_web.sh
+    ports:
+      - "5173:5173"
+    links:
+      - api
+    volumes:
+      - .:/home/node/app
+    environment:
+      VITE_API_URL: "http://localhost:3000"
   
   database:
     image: postgres:16-alpine
