@@ -1,3 +1,5 @@
+import { z } from 'zod'
+
 export interface InvoiceProps {
 	id: string
 	month: string
@@ -24,15 +26,30 @@ export class Invoice {
 	total: number
 
 	constructor(props: InvoiceProps) {
-		this.id = props.id
-		this.month = props.month
-		this.electricity_qtd = props.electricity_qtd
-		this.electricity_total = props.electricity_total
-		this.exemptEnergy_qtd = props.exemptEnergy_qtd
-		this.exemptEnergy_total = props.exemptEnergy_total
-		this.compensatedEnergy_qtd = props.compensatedEnergy_qtd
-		this.compensatedEnergy_total = props.compensatedEnergy_total
-		this.contribution = props.contribution
-		this.total = props.total
+		const invoiceSchema = z.object({
+			id: z.string(),
+			month: z.string(),
+			electricity_qtd: z.number(),
+			electricity_total: z.number(),
+			exemptEnergy_qtd: z.number(),
+			exemptEnergy_total: z.number(),
+			compensatedEnergy_qtd: z.number(),
+			compensatedEnergy_total: z.number(),
+			contribution: z.number(),
+			total: z.number(),
+		})
+
+		const invoice = invoiceSchema.parse(props)
+
+		this.id = invoice.id
+		this.month = invoice.month
+		this.electricity_qtd = invoice.electricity_qtd
+		this.electricity_total = invoice.electricity_total
+		this.exemptEnergy_qtd = invoice.exemptEnergy_qtd
+		this.exemptEnergy_total = invoice.exemptEnergy_total
+		this.compensatedEnergy_qtd = invoice.compensatedEnergy_qtd
+		this.compensatedEnergy_total = invoice.compensatedEnergy_total
+		this.contribution = invoice.contribution
+		this.total = invoice.total
 	}
 }
