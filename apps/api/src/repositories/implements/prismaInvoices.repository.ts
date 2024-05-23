@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { pdfMetadata } from '../../@types/pdfMetadata'
 import { Invoice, InvoiceProps } from '../../entities/Invoice.entity'
+import { formatDate } from '../../utils/dates'
 import { InvoicesRepository } from '../invoices.repository'
 
 export class PrismaInvoicesRepository implements InvoicesRepository {
@@ -13,7 +14,7 @@ export class PrismaInvoicesRepository implements InvoicesRepository {
 	): Promise<void> {
 		await this.prisma.invoice.create({
 			data: {
-				month: new Date(data.month),
+				month: formatDate(data.month),
 				total: data.total,
 				electricity_qtd: data.electricity.qtd,
 				electricity_total: data.electricity.total,
