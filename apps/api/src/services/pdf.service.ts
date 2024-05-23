@@ -38,7 +38,7 @@ export class PdfParse implements Pdf {
 				}
 
 				if (electricity) {
-					dataElectricity.qtd = Number.parseInt(electricity[2])
+					dataElectricity.qtd = Number.parseInt(electricity[2].replace('.', ''))
 					dataElectricity.total = Number.parseFloat(
 						electricity[4].replace(',', '.'),
 					)
@@ -90,7 +90,9 @@ export class PdfParse implements Pdf {
 				}
 
 				if (compensatedEnergy) {
-					dataCompensatedEnergy.qtd = Number.parseInt(compensatedEnergy[4])
+					dataCompensatedEnergy.qtd = Number.parseInt(
+						compensatedEnergy[4].replace('.', ''),
+					)
 					dataCompensatedEnergy.total = Number.parseFloat(
 						compensatedEnergy[6].replace(',', '.'),
 					)
