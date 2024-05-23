@@ -27,6 +27,7 @@
 			"complexity": {
 				"useLiteralKeys": "off"
 			}
-		}
+		},
+		"ignore": ["apps/**/*.spec.ts"]
 	}
 }
