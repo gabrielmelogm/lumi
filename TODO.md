@@ -23,7 +23,7 @@
 - [X] Multiple downloads
 
 ### Tests
-- [ ] Unit tests
+- [X] Unit tests
 
 ## Frontend
 - [X] Dashboard
