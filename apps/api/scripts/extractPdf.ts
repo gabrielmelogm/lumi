@@ -9,17 +9,11 @@ import { PdfParse } from '../src/services/pdf.service'
 class ExtractPdf {
 	constructor() {
 		try {
-			this.clearTable()
 			this.handle()
 			console.log('Successfully generated')
 		} catch (error) {
 			console.error('Error generating data:', error)
 		}
-	}
-
-	async clearTable() {
-		await prisma.invoice.deleteMany()
-		await prisma.owner.deleteMany()
 	}
 
 	getPdfFiles(directory: string) {
