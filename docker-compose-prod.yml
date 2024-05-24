@@ -16,7 +16,8 @@ services:
         window: 120s
     labels:
       - "traefik.enable=true"
-      - "traefik.frontend.rule=Host:lumi-api.gabrielmelo.cloud"
+      - "traefik.http.routers.api.rule=Host(`lumi-api.gabrielmelo.cloud`)"
+      - "traefik.http.services.api.loadbalancer.server.port=3000"
     environment:
       DATABASE_URL: ${DATABASE_URL}
       TRUSTED_DOMAINS: ${TRUSTED_DOMAINS}
@@ -42,7 +43,10 @@ services:
 
   reverse-proxy:
     image: traefik
-    command: --api --docker.exposedbydefault=false
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
     ports:
       - "80:80"
       - "8080:8080"
