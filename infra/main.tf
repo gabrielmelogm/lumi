@@ -27,7 +27,7 @@ resource "aws_security_group" "allow_ssh" {
 }
 
 resource "aws_instance" "lumi" {
-  ami = "ami-0d5eff06f840b45e9"
+  ami = "ami-0e001c9271cf7f3b9"
   instance_type = "t2.micro"
   key_name = aws_key_pair.deployer.key_name
   security_groups = [aws_security_group.allow_ssh.name]
