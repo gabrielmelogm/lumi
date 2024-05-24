@@ -16,6 +16,7 @@ services:
         window: 120s
     networks:
       - traefik_network
+      - lumi_network
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`lumi-api.gabrielmelo.cloud`)"
@@ -36,6 +37,8 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
+    networks:
+      - lumi_network
     ports:
       - "5432:5432"
     environment:
@@ -68,3 +71,4 @@ volumes:
 networks:
   traefik_network:
     external: true
+  lumi_network:
