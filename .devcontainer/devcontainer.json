@@ -30,6 +30,7 @@
 				"irongeek.vscode-env",
 				"biomejs.biome",
 				"humao.rest-client",
+				"hashicorp.terraform",
 				"streetsidesoftware.code-spell-checker",
 				"streetsidesoftware.code-spell-checker-portuguese-brazilian"
 			]
