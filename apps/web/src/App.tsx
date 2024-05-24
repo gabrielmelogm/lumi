@@ -8,12 +8,12 @@ import { getTableData } from './services/getTableData.service'
 import { Invoice } from './layout/DataTable/data'
 
 function App() {
-	const { data } = useQuery({
+	const queryData = useQuery({
 		queryKey: ['invoices'],
 		queryFn: getTableData,
 	})
 
-	const invoices = data as Invoice[]
+	const invoices = queryData?.data || [] as Invoice[]
 
 	return (
 		<div className="w-full flex justify-center px-16">
