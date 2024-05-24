@@ -1,11 +1,20 @@
+import { useQuery } from '@tanstack/react-query'
 import { Container } from './components/Container'
 
 import { Dashboard } from './layout/Dashboard'
 import { DataTable } from './layout/DataTable'
 import { columns } from './layout/DataTable/columns'
-import { invoices } from './layout/DataTable/data'
+import { getTableData } from './services/getTableData.service'
+import { Invoice } from './layout/DataTable/data'
 
 function App() {
+	const { data } = useQuery({
+		queryKey: ['invoices'],
+		queryFn: getTableData,
+	})
+
+	const invoices = data as Invoice[]
+
 	return (
 		<div className="w-full flex justify-center px-16">
 			<Container className="mt-12">

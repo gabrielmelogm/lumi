@@ -1,5 +1,3 @@
-import { getTableData } from '@/services/getTableData.service'
-
 export type Invoice = {
 	id: string
 	month: string
@@ -14,5 +12,3 @@ export type Invoice = {
 	filename: string
 	n_client: string
 }
-
-export const invoices: Invoice[] = await getTableData()
