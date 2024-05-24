@@ -15,9 +15,9 @@ services:
         max_attempts: 3
         window: 120s
     environment:
-      DATABASE_URL: "postgresql://docker:docker@database:5432/lumi"
-      TRUSTED_DOMAINS: "*"
-      PORT: "3000"
+      DATABASE_URL: ${DATABASE_URL}
+      TRUSTED_DOMAINS: ${TRUSTED_DOMAINS}
+      PORT: ${PORT}
   
   database:
     image: postgres:16-alpine
@@ -31,9 +31,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: "docker"
-      POSTGRES_PASSWORD: "docker"
-      POSTGRES_DB: "lumi"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - db:/var/lib/postgresql/data
 
