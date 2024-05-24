@@ -37,8 +37,6 @@ services:
         delay: 5s
         max_attempts: 3
         window: 120s
-    networks:
-      - lumi_network
     ports:
       - "5432:5432"
     environment:
