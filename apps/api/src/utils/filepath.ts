@@ -1,3 +1,5 @@
 import path from 'node:path'
 
-export const filepath = path.resolve(__dirname, '../../invoices')
+const rootProject = process.cwd()
+
+export const filepath = path.resolve(rootProject, 'invoices')
