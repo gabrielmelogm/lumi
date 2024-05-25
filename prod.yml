@@ -1,0 +1,96 @@
+services:
+  lumi_api:
+    image: gabrielmelogm/lumi-api:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    links:
+      - database
+    environment:
+      DATABASE_URL: "postgresql://docker:docker@lumi_db:5432/lumi"
+      TRUSTED_DOMAINS: "*"
+      PORT: "3000"
+    networks:
+      - public
+      - lumi_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.frontend.rule=Host(`lumi-api.gabrielmelo.cloud`)"
+        - "traefik.http.routers.frontend.entrypoints=websecure"
+        - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+        - "traefik.http.routers.frontend.service=frontend"
+        - "traefik.http.routers.frontend.tls.certresolver=leresolver"
+  
+  lumi_db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    networks:
+      - lumi_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+    environment:
+      POSTGRES_USER: "docker"
+      POSTGRES_PASSWORD: "docker"
+      POSTGRES_DB: "lumi"
+    volumes:
+      - lumi-api_db:/var/lib/postgresql/data
+
+  traefik:
+    image: traefik:2.5
+    command:
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --api.insecure=true
+      - --api.dashboard=true
+      - --providers.docker
+      - --providers.docker.swarmMode
+      - --providers.docker.network=public
+      - --log.level=ERROR
+      - --certificatesresolvers.leresolver.acme.httpchallenge=true
+      - --certificatesresolvers.leresolver.acme.email=dev.gabrielmelo@gmail.com
+      - --certificatesresolvers.leresolver.acme.storage=./acme.json
+      - --certificatesresolvers.leresolver.acme.httpchallenge.entrypoint=web
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - public
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./acme.json:/acme.json"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      labels:
+        - "traefik.http.routers.http-catchall.rule=hostregexp(`{host: +}`)"
+        - "traefik.http.routers.http-catchall.entrypoints=web"
+        - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        - "traefik.http.routers.traefik-dashboard.rule=Host(`traefik.gabrielmelo.cloud`)"
+        - "traefik.http.routers.traefik-dashboard.entrypoints=websecure"
+        - "traefik.http.routers.traefik-dashboard.service=api@internal"
+        - "traefik.http.routers.traefik-dashboard.tls.certresolver=leresolver"
+        - "traefik.http.middlewares.traefik-auth.basicauth.users=gabrielmelo:$$2y$$05$$aBKZG..OsEIQvSjVoBzl/e9YJeoZtg6XYAUAi1RbsBoNpdj8.JCKK"
+        - "traefik.http.routers.traefik-dashboard.middlewares=traefik-auth"
+
+networks:
+  public:
+    external: true
+  lumi_network:
+
+volumes:
+  portainer_data:
+  lumi-api_db:
+    external: true
