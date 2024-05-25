@@ -18,6 +18,7 @@ WORKDIR /app
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/invoices ./invoices
+COPY --from=builder /app/invoices ./dist/src/invoices
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/start.sh ./start.sh
 COPY --from=builder /app/node_modules ./node_modules
