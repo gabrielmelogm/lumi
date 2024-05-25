@@ -31,8 +31,7 @@
 - [X] Connect on api
 
 ## Docs
-- [ ] README
+- [X] README
 
 ## CI
-- [ ] Git actions
-- [ ] Deploy
+- [X] Deploy
